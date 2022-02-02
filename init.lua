@@ -1,3 +1,7 @@
+if vim.fn.filereadable("~/.config/nvim/plugins.lua") == 0 then
+  require('plugins')
+end
+
 -- Map leader to space
 vim.g.mapleader = " "
 
@@ -82,9 +86,7 @@ vim.api.nvim_set_keymap('n', 'Br', ':BufferLineCloseRight<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', 'Bl', ':BufferLineCloseLeft<CR>', { noremap = true, silent = true })
 
 -- nvim-tree
-vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
 vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_root_folder_modifier = ':~'
@@ -109,7 +111,11 @@ require('nvim-tree').setup {
     enable = true,
     auto_open = true,
   },
- update_cwd = true,
+  git = {
+    enable = true,
+    ignore = true,
+  },
+  update_cwd = true,
 }
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
